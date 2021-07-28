@@ -65,7 +65,7 @@ class SocketServer {
                             $variables["SERVER_PROTOCOL"] = trim($httpMethodStringSplit[2]);
                         }
                         else if($i == count($buffSplit) - 1){
-                            $otherVars["BODY"] = trim($headerStrSplit[1]);
+                            $otherVars["BODY"] = trim($buffSplit[$i]);
                         }
                         else {
                             $headerStrSplit = explode(":", $buffSplit[$i]);
@@ -108,6 +108,8 @@ class SocketServer {
                     $variables["REMOTE_PORT"] = $remotePort;
                     $variables["SERVER_PORT"] = $this->port;
                     $variables["SERVER_ADDR"] = $this->addr;
+					
+					
 
                     $cgi_param = null;
 
@@ -171,12 +173,11 @@ class SocketServer {
                             continue;
                         }
 
-
                         foreach($variables as $k => $v){
-                            putenv("{$k}=${v}");
+                            putenv("{$k}={$v}");
                         }
                         foreach($otherVars as $k => $v){
-                            putenv("{$k}=${v}");
+                            putenv("{$k}={$v}");
                         }
 
                         if(isset($cgi_param["cmd_map"][$cgiFileType])){
