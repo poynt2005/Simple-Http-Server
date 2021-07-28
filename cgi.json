@@ -1,0 +1,7 @@
+{
+    "cgi_path": "cgi-bin",
+    "cmd_map": {
+        "ps1": "powershell -File %file%",
+        "py": "python %file%"
+    }
+}
